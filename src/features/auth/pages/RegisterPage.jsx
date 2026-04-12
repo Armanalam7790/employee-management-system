@@ -1,23 +1,17 @@
 import React, { useState } from "react";
 import Input from "../../../shared/components/Input";
-import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router";
+
 import Button from "../../../shared/components/Button";
+import { useAuth } from "../hooks/useAuth";
+
 
 const RegisterPage = () => {
-  const [showPassword, setShowPassword] = useState(false);
-  const navigate=   useNavigate()
-  let {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm({mode:"onChange"});
-const handleformsubmit = (data)=>{
-console.log(data);
-reset()
 
-}
+
+   let {register, handleSubmit, handleRegisterFormSubmit ,errors, navigate} =  useAuth()
+
+
+  
   return (
     <div className="min-h-screen flex items-center justify-center bg-white p-4 sm:p-8">
       <div className="w-full max-w-md bg-white/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/50 p-6 sm:p-8 space-y-6 relative overflow-hidden">
@@ -36,10 +30,10 @@ reset()
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit(handleformsubmit)}  className="space-y-5 mb-5">
+        <form onSubmit={handleSubmit(handleRegisterFormSubmit)} className="space-y-5 mb-5">
           {/* name Field */}
 
-          
+
           <Input
             register={register}
             name={"name"}
@@ -52,7 +46,7 @@ reset()
           />
 
 
-   {/* Email Field */}
+          {/* Email Field */}
           <Input
             register={register}
             name={"email"}
@@ -69,11 +63,12 @@ reset()
           <Input
             register={register}
             name={"password"}
-            rules={{ required: "password is requird" ,
-                minLength:{
-                    value:6,
-                    message:"at least 6 char are required"
-                }
+            rules={{
+              required: "password is requird",
+              minLength: {
+                value: 6,
+                message: "at least 6 char are required"
+              }
             }}
             placeholder={"password"}
             type={"password"}
@@ -86,8 +81,8 @@ reset()
         </form>
         <div>
           <p>
-           already have a account?{" "}
-            <span onClick={()=>navigate('/')} className="text-blue-600 cursor-pointer">login here</span>
+            already have a account?{" "}
+            <span onClick={() => navigate('/')} className="text-blue-600 cursor-pointer">login here</span>
           </p>
         </div>
 

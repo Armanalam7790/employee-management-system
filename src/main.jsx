@@ -3,7 +3,10 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 import AppRoutes from './app/routes/AppRoutes.jsx'
+import { AuthContectProvider } from './context/AuthContect.jsx'
 
 createRoot(document.getElementById('root')).render(
-  <AppRoutes />
+ <AuthContectProvider>
+   <AppRoutes />
+ </AuthContectProvider>
 )

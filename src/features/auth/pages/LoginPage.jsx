@@ -1,23 +1,15 @@
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import Input from "../../../shared/components/Input";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import Button from "../../../shared/components/Button";
+import { useAuthContext } from "../../../shared/hook/useContextData";
+import { useAuth } from "../hooks/useAuth";
 
 const LoginPage = () => {
-  const [showPassword, setShowPassword] = useState(false);
-const navigate=   useNavigate()
-  let {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm({mode:"onChange"});
-const handleformsubmit = (data)=>{
-console.log(data);
-reset()
+ 
+ let {register, handleSubmit, handleLoginFormSubmit,errors, navigate} =  useAuth()
 
-}
   return (
     <div className="min-h-screen flex items-center justify-center bg-white p-4 sm:p-8">
       <div className="w-full max-w-md bg-white/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/50 p-6 sm:p-8 space-y-6 relative overflow-hidden">
@@ -36,7 +28,7 @@ reset()
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit(handleformsubmit)}  className="space-y-5 mb-5">
+        <form onSubmit={handleSubmit(handleLoginFormSubmit)}  className="space-y-5 mb-5">
           {/* Email Field */}
 
           <Input
